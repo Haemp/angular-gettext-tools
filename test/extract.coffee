@@ -23,6 +23,18 @@ describe 'Extract', ->
         assert.equal(catalog.items[0].references.length, 1)
         assert.equal(catalog.items[0].references[0], 'test/fixtures/single.html')
 
+    it 'Extracts js strings from HTML', ->
+        files = [
+            'test/fixtures/single-js.html'
+        ]
+        catalog = testExtract(files, {jsAttr: ['js']})
+
+        assert.equal(catalog.items.length, 1)
+        assert.equal(catalog.items[0].msgid, 'Hello!')
+        assert.equal(catalog.items[0].msgstr, '')
+        assert.equal(catalog.items[0].references.length, 1)
+        assert.equal(catalog.items[0].references[0], 'test/fixtures/single-js.html')
+
     it 'Merges multiple views into one .pot', ->
         files = [
             'test/fixtures/single.html'
